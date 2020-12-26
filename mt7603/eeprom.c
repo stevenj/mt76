@@ -121,13 +121,14 @@ static int
 mt7603_eeprom_load(struct mt7603_dev *dev)
 {
 	int ret;
+	u8 *eeprom;
 
 	ret = mt76_eeprom_init(&dev->mt76, MT7603_EEPROM_SIZE);
 	if (ret < 0)
 		return ret;
 
 	// Modify EEPROM Values to try and improve 2.4Ghz Operation
-	u8 *eeprom = dev->mt76.eeprom.data;
+	eeprom = dev->mt76.eeprom.data;
 	eeprom[MT_EE_TX_POWER_CCK] = 0xc6;
 	eeprom[MT_EE_TX_POWER_OFDM_2G_6M] = 0xc6;
 	eeprom[MT_EE_TX_POWER_OFDM_2G_24M] = 0xc6;
