@@ -126,6 +126,20 @@ mt7603_eeprom_load(struct mt7603_dev *dev)
 	if (ret < 0)
 		return ret;
 
+	// Modify EEPROM Values to try and improve 2.4Ghz Operation
+	u8 *eeprom = dev->mt76.eeprom.data;
+	eeprom[MT_EE_TX_POWER_CCK] = 0xc6;
+	eeprom[MT_EE_TX_POWER_OFDM_2G_6M] = 0xc6;
+	eeprom[MT_EE_TX_POWER_OFDM_2G_24M] = 0xc6;
+	eeprom[MT_EE_TX_POWER_HT_16_64_QAM+1] = 0xc2;
+	eeprom[MT_EE_TX_POWER_HT_64_QAM+1] = 0xc0;
+	eeprom[MT_EE_ELAN_RX_MODE_GAIN] = 0x0e;
+	eeprom[MT_EE_ELAN_RX_MODE_NF] = 0x02;
+	eeprom[MT_EE_ELAN_RX_MODE_P1DB] = 0x00;
+	eeprom[MT_EE_ELAN_BYPASS_MODE_GAIN] = 0x0d;
+	eeprom[MT_EE_ELAN_BYPASS_MODE_NF] = 0x0d;
+	eeprom[MT_EE_ELAN_BYPASS_MODE_P1DB] = 0x0a;
+
 	return mt7603_efuse_init(dev);
 }
 
