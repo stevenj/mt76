@@ -15,4 +15,42 @@ This version patches the values read from eeprom for the MT7603EN as follows:
 | 0x0c3 | MT_EE_ELAN_BYPASS_MODE_GAIN | 0x08 | 0x0D |
 | 0x0c4 | MT_EE_ELAN_BYPASS_MODE_NF | 0x08 | 0x0D |
 | 0x0c5 | MT_EE_ELAN_BYPASS_MODE_P1DB | 0x0f | 0x0A |
+|  |  |  |  |
+| 0x34 | MT_EE_NIC_CONF_0 | 0x22 | 0x23 |
+|
 
+## 0xA0 - 0xAF - Chinese Recommended Values
+
+c8,c8,c6,c4,c4,c2,c2,c8,c6,c4,c4,c6,c4,c2
+
+## 0xC0 - 0xC5 - Chinese Recommended Values
+
+03,02,0a,0d,0d,0a
+
+## 0xA0 - 0xAD = Gain.
+
+- 0x88 = 4.0dBm attenuate
+- 0x87 = 3.5dBm attenuate
+- 0x86 = 3.0dBm attenuate
+- 0x85 = 2.5dBm attenuate
+- 0x84 = 2.0dBm attenuate
+- 0x83 = 1.5dBm attenuate
+- 0x82 = 1.0dBm attenuate
+- 0x81 = 0.5dBm attenuate
+- 0x00 = No Gain
+- 0xc1 = 0.5dBm gain
+- 0xc2 = 1.0dBm gain
+- 0xc3 = 1.5dBm gain
+- 0xc4 = 2.0dBm gain
+- 0xc5 = 2.5dBm gain
+- 0xc6 = 3.0dBm gain
+- 0xc7 = 3.5dBm gain
+- 0xc8 = 4.0dBm gain
+
+## 0xC0 - 0xC5
+
+Valid Values 0x00 - 0x0F
+
+### References
+https://aisoa.cn/post-2439.html
+https://forum.openwrt.org/t/newifi-d2-terrible-wifi-performance-on-openwrt/66473/23
