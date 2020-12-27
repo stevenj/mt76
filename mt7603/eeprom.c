@@ -149,7 +149,7 @@ mt7603_eeprom_load(struct mt7603_dev *dev)
 	eeprom[MT_EE_ELAN_RX_MODE_NF] = 0x02;		  // Noise Factor
 	eeprom[MT_EE_ELAN_RX_MODE_P1DB] = 0x0a;		  // The 1 dB compression point (P1dB) is the output power level at which the gain decreases 1 dB from its constant value.
 	eeprom[MT_EE_ELAN_BYPASS_MODE_GAIN] = 0x0f;
-	eeprom[MT_EE_ELAN_BYPASS_MODE_NF] = 0x0d;
+	eeprom[MT_EE_ELAN_BYPASS_MODE_NF] = 0x02;
 	eeprom[MT_EE_ELAN_BYPASS_MODE_P1DB] = 0x0a;
 
 	return mt7603_efuse_init(dev);
