@@ -54,6 +54,12 @@ This version patches the values read from eeprom for the MT7603EN as follows:
 
 Valid Values 0x00 - 0x0F
 
+* NF = Noise Factor, my guess is this tunes the Noise Factor compensation to
+  match the Amplifier onboard
+* P1DB = The 1 dB compression point (P1dB) is the output power level at which
+  the gain decreases 1 dB from its constant value.  Again, my guess this tunes
+  internal compensation to the P1dB value of the amplifier.
+
 ### References
 https://aisoa.cn/post-2439.html
 https://forum.openwrt.org/t/newifi-d2-terrible-wifi-performance-on-openwrt/66473/23
