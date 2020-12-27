@@ -2,9 +2,10 @@
 
 This version patches the values read from eeprom for the MT7603EN as follows:
 
-| ADDRESS | NAME | OLD Value | New Value |
+| ADDRESS | NAME | ORIGINAL | OpenWRT Rec | China Rec |
 |---------|------|-----------|-----------|
 | 0x0a0 | MT_EE_TX_POWER_CCK | 0xC2 | 0xC6 |
+| 0x0a1 | MT_EE_TX_POWER_CCK+1 | 0xC2 | 0xC6 |
 | 0x0a2 | MT_EE_TX_POWER_OFDM_2G_6M | 0xC2 | 0xC6 |
 | 0x0a4 | MT_EE_TX_POWER_OFDM_2G_24M | 0xC2 | 0xC6 |
 | 0x0aa | MT_EE_TX_POWER_HT_16_64_QAM | 0xC4C0 | 0xC4C2 |
@@ -19,9 +20,11 @@ This version patches the values read from eeprom for the MT7603EN as follows:
 | 0x34 | MT_EE_NIC_CONF_0 | 0x22 | 0x23 |
 |
 
-## 0xA0 - 0xAF - Chinese Recommended Values
+## 0xA0 - 0xAF
 
-c8,c8,c6,c4,c4,c2,c2,c8,c6,c4,c4,c6,c4,c2
+| Set | A0 | A1 | A2 | A3 | A4 | A5 | A6 | A7 | A8 | A9 | AA | AB | AC | AD | AE | AF |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Set | A0 | A1 | A2 | A3 | A4 | A5 | A6 | A7 | A8 | A9 | AA | AB | AC | AD | AE | AF |
 
 ## 0xC0 - 0xC5 - Chinese Recommended Values
 
