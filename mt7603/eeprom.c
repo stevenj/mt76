@@ -129,15 +129,26 @@ mt7603_eeprom_load(struct mt7603_dev *dev)
 
 	// Modify EEPROM Values to try and improve 2.4Ghz Operation
 	eeprom = dev->mt76.eeprom.data;
-	eeprom[MT_EE_TX_POWER_CCK] = 0xc6;
-	eeprom[MT_EE_TX_POWER_OFDM_2G_6M] = 0xc6;
-	eeprom[MT_EE_TX_POWER_OFDM_2G_24M] = 0xc6;
-	eeprom[MT_EE_TX_POWER_HT_16_64_QAM+1] = 0xc2;
-	eeprom[MT_EE_TX_POWER_HT_64_QAM+1] = 0xc0;
-	eeprom[MT_EE_ELAN_RX_MODE_GAIN] = 0x0e;
-	eeprom[MT_EE_ELAN_RX_MODE_NF] = 0x02;
-	eeprom[MT_EE_ELAN_RX_MODE_P1DB] = 0x00;
-	eeprom[MT_EE_ELAN_BYPASS_MODE_GAIN] = 0x0d;
+
+	// 0xA0 - 0xAD
+	eeprom[MT_EE_TX_POWER_CCK] = 0xc6;			  // 802.11b 5.5mbps ??
+	eeprom[MT_EE_TX_POWER_CCK+1] = 0xc6;          // 802.11b 11mbps  ??
+	eeprom[MT_EE_TX_POWER_OFDM_2G_6M] = 0xc6;     // 802.11g  6mbps
+	eeprom[MT_EE_TX_POWER_OFDM_2G_6M+1] = 0xc6;   // 802.11g 12mbps  ??
+	eeprom[MT_EE_TX_POWER_OFDM_2G_24M] = 0xc6;    // 802.11g 24mbps
+	eeprom[MT_EE_TX_POWER_OFDM_2G_24M+1] = 0xc6;  // 802.11g 54mbps  ??
+	eeprom[MT_EE_TX_POWER_HT_BPSK_QPSK] = 0xc8;   // 802.11n 7.2/14.4/15/30 mbps
+	eeprom[MT_EE_TX_POWER_HT_BPSK_QPSK+1] = 0xc8; // 802.11n 21.7/43.3/45/90 mbps
+	eeprom[MT_EE_TX_POWER_HT_16_64_QAM] = 0xc8;   // 802.11n 28.9/44.3/60/90(1) 57.8/86.7/120/180(2)
+	eeprom[MT_EE_TX_POWER_HT_16_64_QAM+1] = 0xc8; // 802.11n 57.8/120mbps(1)  115.6/240mbps(2)
+	eeprom[MT_EE_TX_POWER_HT_64_QAM] = 0xc8;      // 802.11n 65/135mbps(1)    130/270mbps(2)
+	eeprom[MT_EE_TX_POWER_HT_64_QAM+1] = 0xc8;    // 802.11n 72.2/150mbps(1)  144.4/300mbps(2)
+
+	// 0xC0 - 0xC5
+	eeprom[MT_EE_ELAN_RX_MODE_GAIN] = 0x0f;		  // RX Gain
+	eeprom[MT_EE_ELAN_RX_MODE_NF] = 0x02;		  // Noise Factor
+	eeprom[MT_EE_ELAN_RX_MODE_P1DB] = 0x0a;		  // The 1 dB compression point (P1dB) is the output power level at which the gain decreases 1 dB from its constant value.
+	eeprom[MT_EE_ELAN_BYPASS_MODE_GAIN] = 0x0f;
 	eeprom[MT_EE_ELAN_BYPASS_MODE_NF] = 0x0d;
 	eeprom[MT_EE_ELAN_BYPASS_MODE_P1DB] = 0x0a;
 
