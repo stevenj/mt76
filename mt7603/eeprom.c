@@ -1,5 +1,7 @@
 // SPDX-License-Identifier: ISC
 
+#include <linux/firmware.h>
+
 #include "mt7603.h"
 #include "eeprom.h"
 
@@ -122,6 +124,7 @@ mt7603_eeprom_load(struct mt7603_dev *dev)
 {
 	int ret;
 	u8 *eeprom;
+	const struct firmware *fw;
 
 	ret = mt76_eeprom_init(&dev->mt76, MT7603_EEPROM_SIZE);
 	if (ret < 0)
@@ -150,7 +153,7 @@ mt7603_eeprom_load(struct mt7603_dev *dev)
 	eeprom[MT_EE_TX_POWER_HT_16_64_QAM] = 0xc6;   // 802.11n 28.9/44.3/60/90(1) 57.8/86.7/120/180(2)
 	eeprom[MT_EE_TX_POWER_HT_16_64_QAM+1] = 0xc4; // 802.11n 57.8/120mbps(1)  115.6/240mbps(2)
 	eeprom[MT_EE_TX_POWER_HT_64_QAM] = 0xc2;      // 802.11n 65/135mbps(1)    130/270mbps(2)
-	eeprom[MT_EE_TX_POWER_HT_64_QAM+1] = 0xc0;    // 802.11n 72.2/150mbps(1)  144.4/300mbps(2)
+	eeprom[MT_EE_TX_POWER_HT_64_QAM+1] = 0xc2;    // 802.11n 72.2/150mbps(1)  144.4/300mbps(2)
 
 	// 0xC0 - 0xC5
 	eeprom[MT_EE_ELAN_RX_MODE_GAIN] = 0x0f;		  // RX Gain
@@ -159,6 +162,19 @@ mt7603_eeprom_load(struct mt7603_dev *dev)
 	eeprom[MT_EE_ELAN_BYPASS_MODE_GAIN] = 0x14;
 	eeprom[MT_EE_ELAN_BYPASS_MODE_NF] = 0x14;
 	eeprom[MT_EE_ELAN_BYPASS_MODE_P1DB] = 0x01;
+
+	// This should allow me to patch eeprom for testing with a reboot, NOT a rebuild.
+	if(request_firmware_direct(&fw, "eeprom_patch.bin", dev->mt76.dev) == 0) {
+		if (fw->size > 0xff) {
+			for (int offset = 0xa0; offset <= 0xaf; offset++) {
+				eeprom[offset] = fw->data[offset];
+			}
+			for (int offset = 0xc0; offset <= 0xc5; offset++) {
+				eeprom[offset] = fw->data[offset];
+			}
+		}
+	}
+	release_firmware(fw_entry);
 
 	return mt7603_efuse_init(dev);
 }
