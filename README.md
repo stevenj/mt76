@@ -147,6 +147,14 @@ Gain, 0x00 - 0x0F in 0.5dBm steps.
   the gain decreases 1 dB from its constant value.  Again, my guess this tunes
   internal compensation to the P1dB value of the amplifier.
 
+### EEPROM Patching
+
+To make iterative testing easier, a file named `eeprom_patch.bin` placed in the
+`/lib/firmware` directory, will, on boot be used to set the eeprom values rather
+than the hard coded ones.  Specific test eeprom patches are in `eeprom_patches`
+pick a patch to test, copy it to the target to test, rename it, reboot.
+
+
 ### References
 
 https://aisoa.cn/post-2439.html
