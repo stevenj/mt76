@@ -174,7 +174,7 @@ mt7603_eeprom_load(struct mt7603_dev *dev)
 			}
 		}
 	}
-	release_firmware(fw_entry);
+	release_firmware(fw);
 
 	return mt7603_efuse_init(dev);
 }
