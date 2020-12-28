@@ -125,6 +125,7 @@ mt7603_eeprom_load(struct mt7603_dev *dev)
 	int ret;
 	u8 *eeprom;
 	const struct firmware *fw;
+	int offset;
 
 	ret = mt76_eeprom_init(&dev->mt76, MT7603_EEPROM_SIZE);
 	if (ret < 0)
@@ -166,10 +167,10 @@ mt7603_eeprom_load(struct mt7603_dev *dev)
 	// This should allow me to patch eeprom for testing with a reboot, NOT a rebuild.
 	if(request_firmware_direct(&fw, "eeprom_patch.bin", dev->mt76.dev) == 0) {
 		if (fw->size > 0xff) {
-			for (int offset = 0xa0; offset <= 0xaf; offset++) {
+			for (offset = 0xa0; offset <= 0xaf; offset++) {
 				eeprom[offset] = fw->data[offset];
 			}
-			for (int offset = 0xc0; offset <= 0xc5; offset++) {
+			for (offset = 0xc0; offset <= 0xc5; offset++) {
 				eeprom[offset] = fw->data[offset];
 			}
 		}
