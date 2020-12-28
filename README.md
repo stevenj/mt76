@@ -1,4 +1,33 @@
-# Hacked mt76 firmware for newifi 2.4ghz issues.
+# Hacked mt76 firmware for newifi-d2 2.4ghz issues.
+
+***THIS PATCH IS SPECIFIC TO THE NEWIFI-D2 HARDWARE.  DO NOT USE ON ANY OTHER DEVICE.***
+
+## How to use
+
+This is a fork of the upstream openwrt mt76 driver.
+We insert our changes into commits directly in the openwrt-19.07 branch.
+
+We then need to fork openwrt source and change `package/kernel/mt76/Makefile`:
+
+```
+PKG_SOURCE_URL:=<url of this repo>
+PKG_SOURCE_DATE:=<date of your change>
+PKG_SOURCE_VERSION:=<hash of your checked in change in the driver repo>
+```
+
+Then produce a patch from the forked openwrt source branch like so:
+
+```
+git diff v19.07.5 > ../phero-openwrt/Custom/patches/newifi-2_4ghz-wifi-mods.patch
+```
+
+Which creates a patch to modify this makefile when the phero-openwrt code is
+building.  The patch then needs to be used by all targets using the newifi-d2
+hardware.
+
+***THIS PATCH IS SPECIFIC TO THE NEWIFI-D2 HARDWARE.  DO NOT USE ON ANY OTHER DEVICE.***
+
+## Details of the patch
 
 This version patches the values read from eeprom for the MT7603EN as follows:
 
