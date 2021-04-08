@@ -21,6 +21,12 @@ PKG_SOURCE_DATE:=<date of your change>
 PKG_SOURCE_VERSION:=<hash of your checked in change in the driver repo>
 ```
 
+You get the PKG_SOURCE_VERSION hash using
+
+```
+git rev-parse HEAD
+```
+
 Then produce a patch from the forked openwrt source branch like so:
 
 ```
